@@ -1,0 +1,17 @@
+{
+  "name": "b2b-content",
+  "version": "1.0.0",
+  "description": "Content for CHUMS B2B pages",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ChumsInc/b2b-content.git"
+  },
+  "private": true,
+  "devDependencies": {
+    "bootstrap": "^5.3.8"
+  }
+}

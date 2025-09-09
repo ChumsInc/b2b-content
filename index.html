@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>B2B Content Testing</title>
+    <base href="https://b2b.chums.com/">
+    <link rel="stylesheet" href="https://b2b.chums.com/css/has-bootstrap.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap" rel="stylesheet"></head>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+<body>
+<div id="app">
+    <div class="has-bootstrap">
+        <div class="container">
+            <div class="mb-3">
+                <div class="row g-3">
+                    <div class="col-auto">
+                        <label for="content-file" class="form-label">Content File</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="file" class="form-control" id="content-file" >
+                    </div>
+                </div>
+                <div id="content-container"></div>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        (function () {
+            const contentContainer = document.getElementById('content-container');
+            const handleFileSelect = (event) => {
+                const file = event.target.files[0];
+                if (!file) {
+                    contentContainer.innerHTML = '<strong>No file selected</strong>';
+                    return;
+                }
+                if (!file.type.startsWith('text/')) {
+                    window.alert('Please select a text file');
+                }
+                const reader = new FileReader();
+                reader.onload = () => {
+                    contentContainer.innerHTML = reader.result;
+                };
+                reader.onerror = () => {
+                    window.alert('Error reading file');
+                }
+                reader.readAsText(file);
+            }
+            document.getElementById('content-file').addEventListener('change', handleFileSelect);
+        }())
+    </script>
+</body>
+</html>
