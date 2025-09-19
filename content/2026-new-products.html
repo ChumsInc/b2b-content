@@ -14,6 +14,9 @@
 
     .product-videos iframe {
         border: none;
+        max-width: 100%;
+        width: 100%;
+        aspect-ratio: 16 / 9;
     }
 </style>
 <div id="products-2026">
@@ -24,16 +27,21 @@
                 <h3>2026 Product Catalog</h3>
                 <div>
                     <div class="mt-2 mb-3">
-                        <a href="/pdf/catalogs/2026/2026%20Chums%20Catalog_090925.pdf"
+                        <a href="/pdf/catalogs/2026/2026%20Chums%20Catalog_091925.pdf"
                            target="_blank" rel="noopener noreferer">
-                            <img src="/content/images/CoverPhotoLandscape@0,5x.png" class="img-fluid"
-                                 srcset="/content/images/CoverPhotoLandscape.png 2x"
-                                 alt="Chums 2026 Product Preview">
+                            <picture class="img-fluid">
+                                <source media="(width < 600px)" srcset="/content/images/catalog-preview-20260919@0,25x.jpg 434w"  />
+                                <source media="(min-width: 600px) and (max-width: 767px)" srcset="/content/images/catalog-preview-20260919@0,5x.jpg 869w" />
+                                <source media="(min-width: 768px) and (max-width: 1199px)" srcset="/content/images/catalog-preview-20260919@0,25x.jpg 434w" />
+                                <source media="(min-width: 1200px) and (max-width: 1399px)" srcset="/content/images/catalog-preview-20260919@0,5x.jpg 869w" />
+                                <source media="(min-width: 1400px) and (max-width: 2000px)" srcset="/content/images/catalog-preview-20260919@0,75x.jpg 1302w" />
+                                <img class="img-fluid" src="/content/images/catalog-preview-20260919.jpg" alt="Chums 2026 Product Preview">
+                            </picture>
                         </a>
                     </div>
                     <div class="link-container mb-3">
                         <a class="btn btn-secondary" target="_blank" rel="noopener"
-                           href="/pdf/catalogs/2026/2026%20Chums%20Catalog_090925.pdf">
+                           href="/pdf/catalogs/2026/2026%20Chums%20Catalog_091925.pdf">
                             Chums 2026 Catalog <small class="ms-2">(21 MB)</small>
                         </a>
                     </div>
@@ -44,7 +52,12 @@
                         <div class="mb-3">
                             <a href="https://b2b.chums.com/pdf/catalogs/2025/2026%20New%20Product%20Cut%20Sheet-compressed-20250702.pdf"
                                target="_blank" rel="noopener noreferer">
-                                <img src="/content/new-for-2026.png" class="img-fluid" alt="Chums 2026 Product Preview">
+                                <picture class="img-fluid">
+                                    <source media="(width < 480px)" srcset="/content/images/new-for-2026--xs.png 480w"  />
+                                    <source media="(min-width: 640px) and (max-width: 800px)" srcset="/content/images/new-for-2026--md.png 800w" />
+                                    <source media="(width > 800px)" srcset="/content/images/new-for-2026.png 1081w" />
+                                    <img class="img-fluid" src="/content/images/new-for-2026.png" alt="Chums 2026 Product Preview" loading="lazy">
+                                </picture>
                             </a>
                         </div>
                         <div class="d-flex justify-content-center">

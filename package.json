@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Content for CHUMS B2B pages",
   "main": "index.js",
+  "type": "module",
   "scripts": {
+    "build": "npx tsc",
+    "resize-images": "node image-utils/index.js --action=resize",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -12,6 +15,13 @@
   },
   "private": true,
   "devDependencies": {
+    "@types/command-line-args": "^5.2.3",
+    "@types/node": "^24.5.2",
     "bootstrap": "^5.3.8"
+  },
+  "dependencies": {
+    "@tsconfig/node18": "^18.2.4",
+    "command-line-args": "^6.0.1",
+    "sharp": "^0.34.4"
   }
 }

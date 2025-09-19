@@ -1,2 +1,5 @@
 .idea
 node_modules
+content/images
+image-utils/img-src
+image-utils/img-out

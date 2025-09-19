@@ -1,0 +1,14 @@
+{
+  "extends": "@tsconfig/node18",
+  "compilerOptions": {
+    "allowJs": true,
+    "emitDeclarationOnly": false,
+  },
+  "exclude": [
+    "node_modules",
+    "eslint.config.js"
+  ],
+  "include": [
+    "image-utils",
+  ],
+}
