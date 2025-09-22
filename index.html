@@ -22,9 +22,18 @@
                 <div class="row g-3">
                     <div class="col-auto">
                         <label for="content-file" class="form-label">Content File</label>
+                        <input type="file" class="form-control form-control-sm" id="content-file" >
                     </div>
                     <div class="col-auto">
-                        <input type="file" class="form-control" id="content-file" >
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="allow-marketing">
+                            <label class="form-check-label" for="allow-marketing">Allow Marketing</label>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-sm btn-secondary" id="refresh-button">
+                            Refresh
+                        </button>
                     </div>
                 </div>
                 <div id="content-container"></div>
@@ -34,26 +43,48 @@
     </div>
     <script>
         (function () {
+            const state = {
+                file: null,
+                content: null,
+                allowMarketing: false,
+            }
             const contentContainer = document.getElementById('content-container');
-            const handleFileSelect = (event) => {
-                const file = event.target.files[0];
-                if (!file) {
+            function loadHandler() {
+                if (!state.file) {
                     contentContainer.innerHTML = '<strong>No file selected</strong>';
                     return;
                 }
-                if (!file.type.startsWith('text/')) {
+                if (!state.file.type.startsWith('text/')) {
                     window.alert('Please select a text file');
                 }
                 const reader = new FileReader();
                 reader.onload = () => {
-                    contentContainer.innerHTML = reader.result;
+                    state.content = reader.result;
+                    contentContainer.innerHTML = state.allowMarketing
+                        ? state.content
+                        : state.content.replaceAll('youtube.com', 'youtube-nocookie.com');
                 };
                 reader.onerror = () => {
                     window.alert('Error reading file');
                 }
-                reader.readAsText(file);
+                reader.readAsText(state.file);
             }
+
+            const handleFileSelect = (event) => {
+                state.content = null;
+                state.file = event.target.files[0];
+                loadHandler();
+            }
+
             document.getElementById('content-file').addEventListener('change', handleFileSelect);
+            document.getElementById('refresh-button').addEventListener('click', () => {
+                contentContainer.innerHTML = '';
+                loadHandler();
+            });
+            document.getElementById('allow-marketing').addEventListener('change', (event) => {
+                state.allowMarketing = event.target.checked;
+                loadHandler();
+            })
         }())
     </script>
 </body>
