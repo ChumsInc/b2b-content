@@ -12,4 +12,5 @@
 ## Image Utils
 * Drop images into '/image-utils/img-src'
 * `npm run resize-images`
+* copy images from '/image-utils/img-out' to the desired path ('/content/images' for example)
 
