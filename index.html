@@ -53,45 +53,40 @@
         (function () {
             const state = {
                 file: null,
+                filename: null,
                 content: null,
                 allowMarketing: false,
             }
+
             const contentContainer = document.getElementById('content-container');
-            function loadHandler() {
-                if (!state.file) {
-                    contentContainer.innerHTML = '<strong>No file selected</strong>';
-                    return;
-                }
-                if (!state.file.type.startsWith('text/')) {
-                    window.alert('Please select a text file');
-                }
-                const reader = new FileReader();
-                reader.onload = () => {
-                    state.content = reader.result;
-                    contentContainer.innerHTML = state.allowMarketing
-                        ? state.content
-                        : state.content.replaceAll('youtube.com', 'youtube-nocookie.com');
-                };
-                reader.onerror = () => {
-                    window.alert('Error reading file');
-                }
-                reader.readAsText(state.file);
+
+            async function loadContent() {
+                if (!state.filename) return;
+                const url = `http://localhost:8080/content/${state.filename}`;
+                const res = await fetch(url, {cache: 'no-cache'});
+                if (!res.ok) throw new Error(`Error loading content: ${res.statusText}`);
+                state.content = await res.text();
+                contentContainer.innerHTML = state.allowMarketing
+                    ? state.content
+                    : state.content.replaceAll('youtube.com', 'youtube-nocookie.com');
             }
 
-            const handleFileSelect = (event) => {
+
+            async function handleFileSelect(event) {
                 state.content = null;
-                state.file = event.target.files[0];
-                loadHandler();
+                state.file = event.target.files[0]
+                state.filename = state.file.name;
+                await loadContent();
             }
 
             document.getElementById('content-file').addEventListener('change', handleFileSelect);
-            document.getElementById('refresh-button').addEventListener('click', () => {
+            document.getElementById('refresh-button').addEventListener('click', async() => {
                 contentContainer.innerHTML = '';
-                loadHandler();
+                await loadContent();
             });
-            document.getElementById('allow-marketing').addEventListener('change', (event) => {
+            document.getElementById('allow-marketing').addEventListener('change', async (event) => {
                 state.allowMarketing = event.target.checked;
-                loadHandler();
+                await loadContent();
             })
         }())
     </script>
