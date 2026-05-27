@@ -11,4 +11,4 @@ app.use('/', express.static(process.cwd(), { index: 'index.html' }));
 app.get('/content/:filename', (req, res) => {
     res.sendFile(path.join(process.cwd(), 'content', req.params.filename));
 });
-app.listen(8080);
+app.listen(8888);
